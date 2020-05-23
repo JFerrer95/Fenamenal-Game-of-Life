@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		D1F517C62478A49A00A6635E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517C52478A49A00A6635E /* AppDelegate.swift */; };
 		D1F517C82478A49A00A6635E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517C72478A49A00A6635E /* SceneDelegate.swift */; };
-		D1F517CA2478A49A00A6635E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517C92478A49A00A6635E /* ViewController.swift */; };
 		D1F517CD2478A49A00A6635E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F517CB2478A49A00A6635E /* Main.storyboard */; };
 		D1F517CF2478A49B00A6635E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1F517CE2478A49B00A6635E /* Assets.xcassets */; };
 		D1F517D22478A49B00A6635E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F517D02478A49B00A6635E /* LaunchScreen.storyboard */; };
+		D1F517DC2478A55200A6635E /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517DB2478A55200A6635E /* Cell.swift */; };
+		D1F517DF2478A58400A6635E /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517DE2478A58400A6635E /* Grid.swift */; };
+		D1F517E82478C26400A6635E /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517E72478C26400A6635E /* GameVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D1F517C22478A49A00A6635E /* Fenamenal Game of Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fenamenal Game of Life.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1F517C52478A49A00A6635E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1F517C72478A49A00A6635E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D1F517C92478A49A00A6635E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D1F517CC2478A49A00A6635E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D1F517CE2478A49B00A6635E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1F517D12478A49B00A6635E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D1F517D32478A49B00A6635E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1F517DB2478A55200A6635E /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		D1F517DE2478A58400A6635E /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		D1F517E72478C26400A6635E /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,49 @@
 		D1F517C42478A49A00A6635E /* Fenamenal Game of Life */ = {
 			isa = PBXGroup;
 			children = (
-				D1F517C52478A49A00A6635E /* AppDelegate.swift */,
-				D1F517C72478A49A00A6635E /* SceneDelegate.swift */,
-				D1F517C92478A49A00A6635E /* ViewController.swift */,
-				D1F517CB2478A49A00A6635E /* Main.storyboard */,
-				D1F517CE2478A49B00A6635E /* Assets.xcassets */,
-				D1F517D02478A49B00A6635E /* LaunchScreen.storyboard */,
-				D1F517D32478A49B00A6635E /* Info.plist */,
+				D1F517E62478C23100A6635E /* ViewControllers */,
+				D1F517D92478A50300A6635E /* Resources */,
+				D1F517DA2478A53D00A6635E /* Screens */,
+				D1F517DD2478A55600A6635E /* Models */,
 			);
 			path = "Fenamenal Game of Life";
+			sourceTree = "<group>";
+		};
+		D1F517D92478A50300A6635E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D1F517D32478A49B00A6635E /* Info.plist */,
+				D1F517CE2478A49B00A6635E /* Assets.xcassets */,
+				D1F517C52478A49A00A6635E /* AppDelegate.swift */,
+				D1F517C72478A49A00A6635E /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D1F517DA2478A53D00A6635E /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				D1F517CB2478A49A00A6635E /* Main.storyboard */,
+				D1F517D02478A49B00A6635E /* LaunchScreen.storyboard */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		D1F517DD2478A55600A6635E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D1F517DB2478A55200A6635E /* Cell.swift */,
+				D1F517DE2478A58400A6635E /* Grid.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D1F517E62478C23100A6635E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D1F517E72478C26400A6635E /* GameVC.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +176,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1F517CA2478A49A00A6635E /* ViewController.swift in Sources */,
 				D1F517C62478A49A00A6635E /* AppDelegate.swift in Sources */,
+				D1F517DF2478A58400A6635E /* Grid.swift in Sources */,
 				D1F517C82478A49A00A6635E /* SceneDelegate.swift in Sources */,
+				D1F517E82478C26400A6635E /* GameVC.swift in Sources */,
+				D1F517DC2478A55200A6635E /* Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +326,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2KHAE3YT5;
-				INFOPLIST_FILE = "Fenamenal Game of Life/Info.plist";
+				INFOPLIST_FILE = "Fenamenal Game of Life/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +345,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2KHAE3YT5;
-				INFOPLIST_FILE = "Fenamenal Game of Life/Info.plist";
+				INFOPLIST_FILE = "Fenamenal Game of Life/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
