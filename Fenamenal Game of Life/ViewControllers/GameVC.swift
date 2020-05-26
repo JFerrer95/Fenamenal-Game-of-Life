@@ -11,6 +11,7 @@ import UIKit
 class GameVC: UIViewController {
     var grid: Grid!
     var timer = Timer()
+    var isRunning = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +24,17 @@ class GameVC: UIViewController {
         grid.computeNext()
     }
     @IBAction func buttonpressed(_ sender: Any) {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
-            self.runLife()
-        })
+        if isRunning {
+            timer.invalidate()
+            view.isUserInteractionEnabled = true
+            
+        } else {
+            view.isUserInteractionEnabled = false
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                self.runLife()
+            })
+        }
+        isRunning.toggle()
     }
 
 

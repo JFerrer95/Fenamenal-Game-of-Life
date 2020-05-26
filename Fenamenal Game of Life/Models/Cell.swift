@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class Cell: UIView {
     var isAlive: Bool = false
     
@@ -35,18 +37,29 @@ class Cell: UIView {
     
     func makeAlive() {
         self.isAlive = true
-        self.backgroundColor = .black
-    }
-    
-    func changeState(){
-        if isAlive == true {
-            makeDead()
-        } else {
-            makeAlive()
+        let randomColorNum = Int.random(in: 1...4)
+        switch randomColorNum {
+        case 1:
+            backgroundColor = UIColor.yellow
+        case 2:
+            backgroundColor = UIColor.red
+        case 3:
+            backgroundColor = UIColor.blue
+        case 4:
+            backgroundColor = UIColor.green
+        default:
+            backgroundColor = UIColor.black
         }
     }
     
+    
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        changeState()
+        if isAlive == false {
+            makeAlive()
+        } else {
+            makeDead()
+        }
     }
 }

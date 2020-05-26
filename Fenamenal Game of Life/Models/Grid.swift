@@ -25,9 +25,9 @@ class Grid {
     
     func setupArray() {
         var gridColumn = [Cell]()
-        for i in 0...24 {
-            for j in 0...24 {
-                let cell = Cell(frame: CGRect(x: width / 25 * CGFloat(i), y: height / 2 - width / 2 + width / 25 * CGFloat(j), width: width / 25, height: width / 25), isAlive: false)
+        for j in 0...24 {
+            for i in 0...24 {
+                let cell = Cell(frame: CGRect(x: width / 25 * CGFloat(j), y: height / 2 - width / 2 + width / 25 * CGFloat(i), width: width / 25, height: width / 25), isAlive: false)
                 view.addSubview(cell)
                 gridColumn.append(cell)
             }
@@ -38,9 +38,12 @@ class Grid {
     }
     
     func draw(matrix: [[Cell]]) {
+        
+        
+        
         for x in 0...24 {
             for y in 0...24 {
-                if nextArray[x][y].isAlive == true {
+                if matrix[x][y].isAlive == true {
                     screenArray[x][y].makeAlive()
                 } else {
                     screenArray[x][y].makeDead()
@@ -54,36 +57,66 @@ class Grid {
         for x in 0...24 {
             for y in 0...24 {
                 let state = screenArray[x][y].isAlive
-                let neighbors = countNeighbors(matrix: screenArray, x: x, y: y)
-                
-                if state == false && neighbors == 3 {
-                    nextArray[x][y].makeAlive()
-                } else if state == true && (neighbors < 2 || neighbors > 3) {
-                    nextArray[x][y].makeDead()
+                let neighbors = countNeighbors(x: x, y: y)
+
+                if state == true {
+                    if neighbors <= 1 {
+                        nextArray[x][y].makeDead()
+                    } else if neighbors >= 4 {
+                        nextArray[x][y].makeDead()
+                    } else {
+                        nextArray[x][y].makeAlive()
+                    }
                 } else {
-                    
-                    nextArray[x][y].isAlive = state
+                    if neighbors == 3 {
+                        nextArray[x][y].makeAlive()
+                    } else {
+                        nextArray[x][y].makeDead()
+                    }
                 }
             }
         }
+        
         draw(matrix: nextArray)
     }
     
-    func countNeighbors(matrix: [[Cell]], x: Int, y: Int) -> Int{
-        var sum = 0
-        for i in -1...1 {
-            for j in -1...1{
-                let col = (x + i + 25) % 25
-                let row = (y + j + 25) % 25
-                if matrix[col][row].isAlive {
-                    sum += 1
-                    
-                }
-            }
-            
+    func countNeighbors( x: Int, y: Int) -> Int{
+        var count = 0
+        let rows = 25
+        let cols = 25
+        if (x - 1 >= 0) {
+            if (screenArray[x - 1][y].isAlive ) { count += 1 }
         }
-        sum -= 1
-        return sum
+        if (x - 1 >= 0 && y - 1 >= 0) {
+            if (screenArray[x - 1][y - 1].isAlive) {count += 1 }
+        }
+        if (x - 1 >= 0 && y + 1 < cols) {
+            if (screenArray[x - 1][y + 1].isAlive){ }
+        }
+        if (y - 1 >= 0) {
+            if (screenArray[x][y - 1].isAlive){ count += 1}
+        }
+        if (y + 1 < cols) {
+            if (screenArray[x][y + 1].isAlive) {count += 1}
+        }
+        if (x + 1 < rows) {
+            if (screenArray[x + 1][y].isAlive) {count += 1}
+        }
+        if (x + 1 < rows && y - 1 >= 0) {
+            if (screenArray[x + 1][y - 1].isAlive) { count += 1}
+        }
+        if (x + 1 < rows && y + 1 < cols) {
+            if (screenArray[x + 1][y + 1].isAlive) { count += 1}
+        }
+        
+
+        
+        
+        
+        
+        
+        
+        return count
     }
     
 }
