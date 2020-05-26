@@ -30,7 +30,7 @@ class GameVC: UIViewController {
             
         } else {
             view.isUserInteractionEnabled = false
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (timer) in
                 self.runLife()
             })
         }
