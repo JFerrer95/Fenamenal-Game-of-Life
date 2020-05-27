@@ -11,7 +11,7 @@ import UIKit
 class GameVC: UIViewController {
     //MARK: - Properties
     var grid: Grid!
-    var settingsVC = SettingsVC()
+    var settingsVC: SettingsVC!
     var timer = Timer()
     var isRunning = false
 
@@ -21,9 +21,9 @@ class GameVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         grid = Grid(width: self.view.frame.width, height: self.view.frame.height, view: self.view)
+        settingsVC = SettingsVC(grid: grid)
         title = "Fenamenal Game of Life"
     }
-    
     
     
     @IBAction func buttonpressed(_ sender: Any) {
@@ -33,5 +33,7 @@ class GameVC: UIViewController {
     @IBAction func settingsButtonPressed(_ sender: Any) {
         present(settingsVC, animated: true)
     }
+    
+    
     
 }

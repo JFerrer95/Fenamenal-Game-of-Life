@@ -20,6 +20,14 @@ class SettingsVC: UIViewController {
         setupViews()
     }
     
+    init(grid: Grid){
+        super.init(nibName: nil, bundle: nil)
+        self.grid = grid
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private func setupViews(){
         
@@ -27,7 +35,7 @@ class SettingsVC: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         speedSlider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(speedSlider)
-        view.backgroundColor = UIColor(white: 1, alpha: 0.25)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.50)
 
         NSLayoutConstraint.activate([
             speedSlider.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
@@ -47,7 +55,7 @@ class SettingsVC: UIViewController {
     }
     
     @objc func speedsliderChanged(){
-        
+        grid?.speed = speedSlider.value
     }
 
 }
