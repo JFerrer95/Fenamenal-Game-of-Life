@@ -28,6 +28,7 @@ class Cell: UIView {
         }
     }
     
+    
     init(frame: CGRect, isAlive: Bool = false ) {
         super.init(frame: frame)
         self.isAlive = isAlive

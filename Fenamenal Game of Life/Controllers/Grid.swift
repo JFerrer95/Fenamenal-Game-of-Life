@@ -16,6 +16,7 @@ class Grid {
     var width: CGFloat!
     var height: CGFloat!
     var view: UIView!
+    var cellSize: CGFloat!
     
     var generations = 0 {
         didSet{
@@ -34,9 +35,13 @@ class Grid {
         self.width = width
         self.height = height
         self.view = view
+        self.cellSize = width / 25
         self.screenArray = setupGrid(width: width, height: height, view: view)
         self.nextArray = setupGrid(width: width, height: height, view: view, isNext: true)
+        
     }
+    
+
     
     
     func setupGrid(width: CGFloat, height: CGFloat, view: UIView, isNext: Bool = false) -> [[Cell]] {
@@ -147,6 +152,8 @@ class Grid {
         generations += 1
         computeNext()
     }
+    
+
     
 }
 
