@@ -53,7 +53,7 @@ class Grid {
         return grid
     }
     
-
+    
     
     func resetGrid(grid: [[Cell]]) {
         for x in 0...24 {
@@ -112,6 +112,7 @@ class Grid {
         }
         return count
     }
+    
     
     func configureTimer() {
         

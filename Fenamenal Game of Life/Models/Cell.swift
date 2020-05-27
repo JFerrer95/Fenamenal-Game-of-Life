@@ -12,6 +12,21 @@ import UIKit
 
 class Cell: UIView {
     var isAlive: Bool = false
+    var color: UIColor{
+        switch Settings.shared.cellColor {
+            
+        case .green:
+            return .systemGreen
+        case .blue:
+            return .systemBlue
+        case .red:
+            return .systemRed
+        case .black:
+            return .black
+        case .random:
+            return UIColor().getRandomColor()
+        }
+    }
     
     init(frame: CGRect, isAlive: Bool = false ) {
         super.init(frame: frame)
@@ -21,6 +36,10 @@ class Cell: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func colorChanged() {
+        if isAlive { backgroundColor = color }
     }
     
     func configureView() {
@@ -36,24 +55,9 @@ class Cell: UIView {
     }
     
     func makeAlive() {
-        self.isAlive = true
-        let randomColorNum = Int.random(in: 1...4)
-        switch randomColorNum {
-        case 1:
-            backgroundColor = UIColor.yellow
-        case 2:
-            backgroundColor = UIColor.red
-        case 3:
-            backgroundColor = UIColor.blue
-        case 4:
-            backgroundColor = UIColor.green
-        default:
-            backgroundColor = UIColor.black
-        }
+        isAlive = true
+        backgroundColor = color
     }
-    
-    
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if isAlive == false {
