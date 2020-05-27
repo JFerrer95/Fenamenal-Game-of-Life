@@ -11,32 +11,21 @@ import UIKit
 class Grid {
     
     var screenArray = [[Cell]]()
-   
+    var timer = Timer()
     var width: CGFloat!
     var height: CGFloat!
     var view: UIView!
+    var generations = 0
+    
     init(width: CGFloat, height: CGFloat, view: UIView) {
         self.width = width
         self.height = height
         self.view = view
-        setupArray()
+        self.screenArray = setupNextArray(width: width, height: height, view: view)
     }
     
     
-    func setupArray() {
-        var gridColumn = [Cell]()
-        for j in 0...24 {
-            for i in 0...24 {
-                let cell = Cell(frame: CGRect(x: width / 25 * CGFloat(j), y: height / 2 - width / 2 + width / 25 * CGFloat(i), width: width / 25, height: width / 25), isAlive: false)
-                view.addSubview(cell)
-                gridColumn.append(cell)
-            }
-            screenArray.append(gridColumn)
-            gridColumn.removeAll()
-        }
-        
-    }
-    func setupNextArray() -> [[Cell]] {
+    func setupNextArray(width: CGFloat, height: CGFloat, view: UIView) -> [[Cell]] {
         var nextArray = [[Cell]]()
         var gridColumn = [Cell]()
         for j in 0...24 {
@@ -51,6 +40,7 @@ class Grid {
         return nextArray
     }
     
+    
     func draw(matrix: [[Cell]]) {
 
         for x in 0...24 {
@@ -59,7 +49,6 @@ class Grid {
                     screenArray[x][y].makeAlive()
                 } else {
                     screenArray[x][y].makeDead()
-                    
                 }
             }
         }
@@ -67,14 +56,14 @@ class Grid {
     }
     
     func computeNext(){
-        var nextArray = setupNextArray()
+        let nextArray = setupNextArray(width: width, height: height, view: view)
         
         for x in 0...24 {
             for y in 0...24 {
                 let state = screenArray[x][y].isAlive
                 let neighbors = countNeighbors(x: x, y: y)
                 
-                if screenArray[x][y].isAlive == true {
+                if state == true {
                     if neighbors == 2 || neighbors == 3 {
                         nextArray[x][y].makeAlive()
                     } else {
@@ -100,12 +89,29 @@ class Grid {
                 if (i == x && j == y) || (i >= rows) || (j >= rows) || ( i < 0 ) || (j < 0) {
                     continue
                 }
-                
                 if screenArray[i][j].isAlive { count += 1}
             }
         }
-
         return count
+    }
+    
+    func configureTimer() {
+        if timer.isValid {
+            timer.invalidate()
+            view.isUserInteractionEnabled = true
+            
+        } else {
+            view.isUserInteractionEnabled = false
+            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (timer) in
+                self.run()
+            })
+        }
+
+    }
+    
+    func run(){
+        generations += 1
+        computeNext()
     }
     
 }
