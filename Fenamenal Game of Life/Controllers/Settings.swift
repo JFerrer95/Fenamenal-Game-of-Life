@@ -9,7 +9,7 @@
 import UIKit
 
 enum CellColor: Int {
-    case green = 0
+    case green = 1
     case blue
     case red
     case black
@@ -17,7 +17,12 @@ enum CellColor: Int {
 }
 
 class Settings{
+
     static let shared = Settings()
-    var cellColor: CellColor = .black
+    var cellColor: CellColor = .random {
+        didSet{
+            NotificationCenter.default.post(name: .didChangeCellColor, object: nil)
+        }
+    }
     
 }

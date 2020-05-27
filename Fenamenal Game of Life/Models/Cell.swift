@@ -32,13 +32,14 @@ class Cell: UIView {
         super.init(frame: frame)
         self.isAlive = isAlive
         configureView()
+        NotificationCenter.default.addObserver(self, selector: #selector(colorChanged), name: .didChangeCellColor, object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func colorChanged() {
+    @objc func colorChanged() {
         if isAlive { backgroundColor = color }
     }
     

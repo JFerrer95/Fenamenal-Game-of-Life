@@ -63,6 +63,8 @@ class SettingsVC: UIViewController {
         
         for i in 1...5 {
             let button = UIButton()
+            button.tag = i
+            button.addTarget(self, action: #selector(colorChanged(sender:)), for: .touchUpInside)
             switch i {
                 case 1:
                     button.backgroundColor = .systemGreen
@@ -80,14 +82,24 @@ class SettingsVC: UIViewController {
             }
             cellColorButtons.append(button)
             stackView.addArrangedSubview(button)
+            if i == Settings.shared.cellColor.rawValue {
+                colorChanged(sender: button)
+            }
         }
-        let currentColor = Settings.shared.cellColor
-        cellColorButtons[currentColor.rawValue].layer.borderWidth = 1
-        cellColorButtons[currentColor.rawValue].layer.borderColor = UIColor.yellow.cgColor
+        
     }
     
-    @objc func colorChanged() {
-        
+    
+    @objc func colorChanged(sender: UIButton) {
+        guard let color = CellColor.init(rawValue: sender.tag) else { return }
+        Settings.shared.cellColor = color
+        for button in cellColorButtons {
+            button.layer.borderWidth = 0
+            if Settings.shared.cellColor.rawValue == button.tag {
+                button.layer.borderWidth = 2
+                button.layer.borderColor = UIColor.yellow.cgColor
+            }
+        }
     }
     
     private func configureStackViewConstraints() {
