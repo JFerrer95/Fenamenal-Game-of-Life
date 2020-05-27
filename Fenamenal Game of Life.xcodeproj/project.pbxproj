@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D174DD81247E0C2A00FE5747 /* GridHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD80247E0C2A00FE5747 /* GridHelper.swift */; };
 		D174DD84247E16E300FE5747 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD83247E16E300FE5747 /* SettingsVC.swift */; };
 		D174DD87247E311800FE5747 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD86247E311800FE5747 /* Settings.swift */; };
 		D174DD8A247E32EB00FE5747 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD89247E32EB00FE5747 /* UIColor+Ext.swift */; };
@@ -23,7 +22,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D174DD80247E0C2A00FE5747 /* GridHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridHelper.swift; sourceTree = "<group>"; };
 		D174DD83247E16E300FE5747 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		D174DD86247E311800FE5747 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D174DD89247E32EB00FE5747 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				D1F517DB2478A55200A6635E /* Cell.swift */,
-				D174DD80247E0C2A00FE5747 /* GridHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,7 +205,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1F517C62478A49A00A6635E /* AppDelegate.swift in Sources */,
-				D174DD81247E0C2A00FE5747 /* GridHelper.swift in Sources */,
 				D174DD8C247E465D00FE5747 /* Notification+Ext.swift in Sources */,
 				D174DD87247E311800FE5747 /* Settings.swift in Sources */,
 				D1F517DF2478A58400A6635E /* Grid.swift in Sources */,

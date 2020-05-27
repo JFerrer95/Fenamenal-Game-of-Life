@@ -14,7 +14,21 @@
                     <view key="view" contentMode="scaleToFill" id="rNw-oh-po5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5w9-TP-Fja">
+                                <rect key="frame" x="171" y="88" width="72" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetButtonPressed:" destination="b7J-jF-E1J" eventType="touchUpInside" id="Nmi-nz-kHe"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="5w9-TP-Fja" firstAttribute="centerX" secondItem="rNw-oh-po5" secondAttribute="centerX" id="997-zp-qd3"/>
+                            <constraint firstItem="5w9-TP-Fja" firstAttribute="top" secondItem="VRo-Kp-8GT" secondAttribute="top" id="foI-Fp-9hC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="VRo-Kp-8GT"/>
                     </view>
                     <navigationItem key="navigationItem" id="2UZ-za-jsI">
@@ -23,7 +37,7 @@
                                 <action selector="settingsButtonPressed:" destination="b7J-jF-E1J" id="mgg-zW-hmD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Start" id="Rys-oz-J21">
+                        <barButtonItem key="rightBarButtonItem" title="Start" image="play.circle" catalog="system" id="Rys-oz-J21">
                             <connections>
                                 <action selector="buttonpressed:" destination="b7J-jF-E1J" id="plw-DT-Dgx"/>
                             </connections>
@@ -55,5 +69,6 @@
     </scenes>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="play.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

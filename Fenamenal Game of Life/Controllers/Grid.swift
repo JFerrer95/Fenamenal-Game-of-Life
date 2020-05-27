@@ -19,7 +19,7 @@ class Grid {
     
     var generations = 0 {
         didSet{
-            print("Generation: \(generations)")
+            NotificationCenter.default.post(name: .generationChanged, object: nil, userInfo: ["generations": generations])
         }
     }
     var speed: Float = 0.3 {
@@ -53,7 +53,12 @@ class Grid {
         return grid
     }
     
-    
+    func resetGame() {
+        timer.invalidate()
+        view.isUserInteractionEnabled = true
+        resetGrid(grid: screenArray)
+        generations = 0
+    }
     
     func resetGrid(grid: [[Cell]]) {
         for x in 0...24 {

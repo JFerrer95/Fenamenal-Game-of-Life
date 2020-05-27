@@ -10,5 +10,6 @@ import Foundation
 
 extension Notification.Name {
     static let didChangeCellColor = Notification.Name("didChangeCellColor")
-
+    static let generationChanged = Notification.Name("generationChanged")
+    static let gameReset = Notification.Name("gameReset")
 }
