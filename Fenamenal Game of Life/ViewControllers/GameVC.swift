@@ -9,33 +9,29 @@
 import UIKit
 
 class GameVC: UIViewController {
+    //MARK: - Properties
     var grid: Grid!
+    var settingsVC = SettingsVC()
     var timer = Timer()
     var isRunning = false
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         grid = Grid(width: self.view.frame.width, height: self.view.frame.height, view: self.view)
-        
+        title = "Fenamenal Game of Life"
     }
     
-    func runLife() {
-        grid.computeNext()
-    }
+    
+    
     @IBAction func buttonpressed(_ sender: Any) {
-        if isRunning {
-            timer.invalidate()
-            view.isUserInteractionEnabled = true
-            
-        } else {
-            view.isUserInteractionEnabled = false
-            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (timer) in
-                self.runLife()
-            })
-        }
-        isRunning.toggle()
+        grid.configureTimer()
     }
 
-
+    @IBAction func settingsButtonPressed(_ sender: Any) {
+        present(settingsVC, animated: true)
+    }
+    
 }

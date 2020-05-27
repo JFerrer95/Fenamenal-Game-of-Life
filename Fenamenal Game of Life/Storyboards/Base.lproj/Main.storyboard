@@ -18,6 +18,11 @@
                         <viewLayoutGuide key="safeArea" id="VRo-Kp-8GT"/>
                     </view>
                     <navigationItem key="navigationItem" id="2UZ-za-jsI">
+                        <barButtonItem key="leftBarButtonItem" image="gear" catalog="system" id="fcq-dI-esH">
+                            <connections>
+                                <action selector="settingsButtonPressed:" destination="b7J-jF-E1J" id="mgg-zW-hmD"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Start" id="Rys-oz-J21">
                             <connections>
                                 <action selector="buttonpressed:" destination="b7J-jF-E1J" id="plw-DT-Dgx"/>
@@ -27,7 +32,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZL-Y7-oIF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1139.1304347826087" y="38.839285714285715"/>
+            <point key="canvasLocation" x="1288" y="39"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ad9-mp-M0v">
@@ -48,4 +53,7 @@
             <point key="canvasLocation" x="228.98550724637684" y="38.839285714285715"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gear" catalog="system" width="128" height="119"/>
+    </resources>
 </document>

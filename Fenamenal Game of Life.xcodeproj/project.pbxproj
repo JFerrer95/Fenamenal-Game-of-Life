@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D174DD81247E0C2A00FE5747 /* GridHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD80247E0C2A00FE5747 /* GridHelper.swift */; };
+		D174DD84247E16E300FE5747 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD83247E16E300FE5747 /* SettingsVC.swift */; };
 		D1F517C62478A49A00A6635E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517C52478A49A00A6635E /* AppDelegate.swift */; };
 		D1F517C82478A49A00A6635E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517C72478A49A00A6635E /* SceneDelegate.swift */; };
 		D1F517CD2478A49A00A6635E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F517CB2478A49A00A6635E /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D174DD80247E0C2A00FE5747 /* GridHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridHelper.swift; sourceTree = "<group>"; };
+		D174DD83247E16E300FE5747 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		D1F517C22478A49A00A6635E /* Fenamenal Game of Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fenamenal Game of Life.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1F517C52478A49A00A6635E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1F517C72478A49A00A6635E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D174DD82247E16A100FE5747 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D1F517CB2478A49A00A6635E /* Main.storyboard */,
+				D1F517D02478A49B00A6635E /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		D1F517B92478A49A00A6635E = {
 			isa = PBXGroup;
 			children = (
@@ -60,9 +73,9 @@
 		D1F517C42478A49A00A6635E /* Fenamenal Game of Life */ = {
 			isa = PBXGroup;
 			children = (
+				D174DD82247E16A100FE5747 /* Storyboards */,
 				D1F517E62478C23100A6635E /* ViewControllers */,
 				D1F517D92478A50300A6635E /* Resources */,
-				D1F517DA2478A53D00A6635E /* Screens */,
 				D1F517DD2478A55600A6635E /* Models */,
 			);
 			path = "Fenamenal Game of Life";
@@ -79,20 +92,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		D1F517DA2478A53D00A6635E /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				D1F517CB2478A49A00A6635E /* Main.storyboard */,
-				D1F517D02478A49B00A6635E /* LaunchScreen.storyboard */,
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
 		D1F517DD2478A55600A6635E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				D1F517DB2478A55200A6635E /* Cell.swift */,
 				D1F517DE2478A58400A6635E /* Grid.swift */,
+				D174DD80247E0C2A00FE5747 /* GridHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				D1F517E72478C26400A6635E /* GameVC.swift */,
+				D174DD83247E16E300FE5747 /* SettingsVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -177,10 +183,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1F517C62478A49A00A6635E /* AppDelegate.swift in Sources */,
+				D174DD81247E0C2A00FE5747 /* GridHelper.swift in Sources */,
 				D1F517DF2478A58400A6635E /* Grid.swift in Sources */,
 				D1F517C82478A49A00A6635E /* SceneDelegate.swift in Sources */,
 				D1F517E82478C26400A6635E /* GameVC.swift in Sources */,
 				D1F517DC2478A55200A6635E /* Cell.swift in Sources */,
+				D174DD84247E16E300FE5747 /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
