@@ -24,7 +24,9 @@ class Grid {
     }
     var speed: Float = 0.3 {
         didSet{
+            if timer.isValid {
             speedChanged()
+            }
         }
     }
     
