@@ -11,6 +11,7 @@
 		D174DD87247E311800FE5747 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD86247E311800FE5747 /* Settings.swift */; };
 		D174DD8A247E32EB00FE5747 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD89247E32EB00FE5747 /* UIColor+Ext.swift */; };
 		D174DD8C247E465D00FE5747 /* Notification+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174DD8B247E465D00FE5747 /* Notification+Ext.swift */; };
+		D185EE3A247F24B300CC41B8 /* PresetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185EE39247F24B300CC41B8 /* PresetCell.swift */; };
 		D199EEC9247E68C5009427E7 /* ShapePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199EEC8247E68C5009427E7 /* ShapePreset.swift */; };
 		D1F517C62478A49A00A6635E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517C52478A49A00A6635E /* AppDelegate.swift */; };
 		D1F517C82478A49A00A6635E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F517C72478A49A00A6635E /* SceneDelegate.swift */; };
@@ -27,6 +28,7 @@
 		D174DD86247E311800FE5747 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D174DD89247E32EB00FE5747 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		D174DD8B247E465D00FE5747 /* Notification+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Ext.swift"; sourceTree = "<group>"; };
+		D185EE39247F24B300CC41B8 /* PresetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetCell.swift; sourceTree = "<group>"; };
 		D199EEC8247E68C5009427E7 /* ShapePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapePreset.swift; sourceTree = "<group>"; };
 		D1DA8FFB247E51F600287A47 /* Fenamenal Game of Life.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Fenamenal Game of Life.entitlements"; sourceTree = "<group>"; };
 		D1F517C22478A49A00A6635E /* Fenamenal Game of Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fenamenal Game of Life.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				D199EEC8247E68C5009427E7 /* ShapePreset.swift */,
+				D185EE39247F24B300CC41B8 /* PresetCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1F517C62478A49A00A6635E /* AppDelegate.swift in Sources */,
+				D185EE3A247F24B300CC41B8 /* PresetCell.swift in Sources */,
 				D174DD8C247E465D00FE5747 /* Notification+Ext.swift in Sources */,
 				D199EEC9247E68C5009427E7 /* ShapePreset.swift in Sources */,
 				D174DD87247E311800FE5747 /* Settings.swift in Sources */,

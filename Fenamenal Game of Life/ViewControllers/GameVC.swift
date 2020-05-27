@@ -15,6 +15,7 @@ class GameVC: UIViewController {
     var timer = Timer()
     var isRunning = false
     let presetView = UIView()
+    var presetCollectionView: UICollectionView!
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
@@ -26,6 +27,7 @@ class GameVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: .generationChanged, object: nil)
         configurePresetBar()
         setupPreset()
+
     }
     
     @objc func updateTitle(_ notification: NSNotification ) {
@@ -80,43 +82,20 @@ class GameVC: UIViewController {
     }
     
     func setupPreset() {
-        let preset = ShapePreset(frame: CGRect(x: presetView.center.x, y: presetView.center.y, width: grid.cellSize * 5, height: grid.cellSize * 5))
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(panGesture:)))
-        preset.addGestureRecognizer(panGesture)
-        presetView.addSubview(preset)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(collectionView)
+        NSLayoutConstraint.activate([
+            self.view.topAnchor.constraint(equalTo: collectionView.topAnchor),
+            self.view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            self.view.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
+            self.view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+        ])
+        self.presetCollectionView = collectionView
+        
+        
     }
     
-    @objc private func handlePanGesture(panGesture: UIPanGestureRecognizer) {
-        
-        guard let preset = panGesture.view as? ShapePreset else { return }
-        
-        let translation = panGesture.translation(in: self.view)
-        panGesture.setTranslation(CGPoint.zero, in: self.view)
-        
-        switch(panGesture.state) {
-            
-        case .began:
-            let point = CGPoint(x: preset.center.x + translation.x,
-                                y: preset.center.y + translation.y)
-            
-            preset.center = point
-        case .changed:
-            
-            let point = CGPoint(x: preset.center.x + translation.x,
-                                y: preset.center.y + translation.y)
-            preset.center = point
-            
-        case .ended:
-            checkPlacement(preset)
-            print("ended")
-        case .cancelled:
-            print("canceled pan")
-        case .failed:
-            print("failed pan")
-        default:
-            print("default")
-        }
-    }
     
     func checkPlacement(_ preset: ShapePreset) {
         
@@ -129,5 +108,21 @@ class GameVC: UIViewController {
         }
         
     }
+    
+}
+
+extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetCell.identifier, for: indexPath) as! PresetCell
+        
+        cell.textLabel.text = "\(indexPath.item)"
+        return cell
+    }
+
+
     
 }
