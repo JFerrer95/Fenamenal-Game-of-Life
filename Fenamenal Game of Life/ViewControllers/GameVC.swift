@@ -15,6 +15,7 @@ class GameVC: UIViewController {
     var timer = Timer()
     var isRunning = false
     
+    @IBOutlet weak var nextButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +41,20 @@ class GameVC: UIViewController {
         if isRunning == false {
             isRunning = true
             sender.image = UIImage(systemName: "pause.circle")
+            nextButton.isEnabled = false
         } else {
             isRunning = false
             sender.image = UIImage(systemName: "play.circle")
+            nextButton.isEnabled = true
         }
         grid.configureTimer()
+    }
+    
+    @IBAction func nextButtonPressed(_ sender: UIBarButtonItem) {
+        if isRunning == false {
+            grid.computeNext()
+            grid.generations += 1
+        }
     }
     
     @IBAction func settingsButtonPressed(_ sender: Any) {
@@ -55,5 +65,6 @@ class GameVC: UIViewController {
         grid.resetGame()
     }
     
+
     
 }

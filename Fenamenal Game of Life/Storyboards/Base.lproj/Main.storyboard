@@ -37,12 +37,22 @@
                                 <action selector="settingsButtonPressed:" destination="b7J-jF-E1J" id="mgg-zW-hmD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Start" image="play.circle" catalog="system" id="Rys-oz-J21">
-                            <connections>
-                                <action selector="buttonpressed:" destination="b7J-jF-E1J" id="plw-DT-Dgx"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="forward.end" catalog="system" id="MVF-Fz-FRQ">
+                                <connections>
+                                    <action selector="nextButtonPressed:" destination="b7J-jF-E1J" id="wWX-QO-BqH"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Start" image="play" catalog="system" id="Rys-oz-J21">
+                                <connections>
+                                    <action selector="buttonpressed:" destination="b7J-jF-E1J" id="plw-DT-Dgx"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="nextButton" destination="MVF-Fz-FRQ" id="gcn-eB-5ZN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZL-Y7-oIF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -68,7 +78,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="forward.end" catalog="system" width="128" height="120"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="play.circle" catalog="system" width="128" height="121"/>
+        <image name="play" catalog="system" width="120" height="128"/>
     </resources>
 </document>
