@@ -73,16 +73,22 @@ class SettingsVC: UIViewController {
                 case 4:
                     button.backgroundColor = .black
                 case 5:
-                    button.backgroundColor = .clear
+                    button.backgroundColor = .systemBackground
                     button.setImage(UIImage(systemName: "shuffle"), for: .normal)
                 default:
                     button.backgroundColor = .black
             }
+            cellColorButtons.append(button)
             stackView.addArrangedSubview(button)
         }
+        let currentColor = Settings.shared.cellColor
+        cellColorButtons[currentColor.rawValue].layer.borderWidth = 1
+        cellColorButtons[currentColor.rawValue].layer.borderColor = UIColor.yellow.cgColor
     }
     
-    
+    @objc func colorChanged() {
+        
+    }
     
     private func configureStackViewConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,8 +96,7 @@ class SettingsVC: UIViewController {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: speedSlider.bottomAnchor, constant: 20),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            stackView.heightAnchor.constraint(equalToConstant: 20)
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
     @objc func speedsliderChanged(){

@@ -9,7 +9,7 @@
 import UIKit
 
 enum CellColor: Int {
-    case green
+    case green = 0
     case blue
     case red
     case black
