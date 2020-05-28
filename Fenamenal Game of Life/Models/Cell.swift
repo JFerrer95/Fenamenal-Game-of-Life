@@ -11,6 +11,7 @@ import UIKit
 
 
 class Cell: UIView {
+    var grid: Grid?
     var isAlive: Bool = false
     var color: UIColor{
         switch Settings.shared.cellColor {
@@ -46,7 +47,7 @@ class Cell: UIView {
     
     func configureView() {
         self.backgroundColor = .white
-    
+        
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 1
     }
@@ -61,11 +62,49 @@ class Cell: UIView {
         backgroundColor = color
     }
     
+    func getCoordinates() -> (x: Int, y: Int)? {
+        for x in 0...24 {
+            for y in 0...24 {
+                if grid?.screenArray[x][y] == self {
+                    return (x: x, y: y)
+                }
+            }
+        }
+        return nil
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isAlive == false {
-            makeAlive()
-        } else {
-            makeDead()
+        
+        guard let preset = grid?.currentPreset else { return }
+        if preset.box.count == 1 {
+            if isAlive == false {
+                makeAlive()
+            } else {
+                makeDead()
+            }
+        } else if ((preset.box.count * preset.box.count) / 2) == 4  {
+            guard let coordinates = getCoordinates() else { return }
+            checkFor9(coordinates: coordinates)
+        }
+    }
+    
+    func checkFor9(coordinates: (x: Int, y: Int)) {
+        let rows = 25
+        
+        for i in coordinates.x-1...coordinates.x+1 {
+            for j in coordinates.y-1...coordinates.y+1 {
+                if ((i >= rows) || (j >= rows) || ( i < 0 ) || (j < 0)) {
+                    continue
+                }
+       
+                guard let presetCellIsActive = grid?.currentPreset.box[i - coordinates.x + 1][j - coordinates.y + 1].isAlive else { return }
+                if presetCellIsActive {
+                    grid?.screenArray[i][j].makeAlive()
+                } else {
+                    grid?.screenArray[i][j].makeDead()
+                }
+            }
         }
     }
 }
+

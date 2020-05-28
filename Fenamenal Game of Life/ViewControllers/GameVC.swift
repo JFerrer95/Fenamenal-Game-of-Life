@@ -16,8 +16,8 @@ class GameVC: UIViewController {
     var isRunning = false
     let presetView = UIView()
     var presetCollectionView: UICollectionView!
-    var presets: [ShapePreset] = []
-    var currentPreset: ShapePreset!
+    
+    
     var label = UILabel()
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBOutlet weak var resetButton: UIButton!
@@ -89,10 +89,10 @@ class GameVC: UIViewController {
     }
     
     func configureCurrentPresetView(index: Int) {
-        if currentPreset != nil { currentPreset.removeFromSuperview() }
-        let selectedPreset = presets[index]
+        if grid.currentPreset != nil { grid.currentPreset.removeFromSuperview() }
+        let selectedPreset = grid.presets[index]
         let preset = ShapePreset(size: selectedPreset.size, cellWidth: selectedPreset.cellWidth, brushType: selectedPreset.currentBrush)
-        currentPreset = preset
+        grid.currentPreset = preset
         preset.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(preset)
         
@@ -101,7 +101,7 @@ class GameVC: UIViewController {
             preset.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -preset.frame.width / 2)
         ])
         
-        label.text = "Current Brush: " + currentPreset.currentBrush.rawValue
+        label.text = "Current Brush: " + grid.currentPreset.currentBrush.rawValue.capitalized
     }
     
 
@@ -162,16 +162,17 @@ class GameVC: UIViewController {
 
 extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func configurePresets() {
-        presets.append(ShapePreset(size: 1, cellWidth: grid.cellSize, brushType: .dot))
-        presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .blinker))
+        grid.presets.append(ShapePreset(size: 1, cellWidth: grid.cellSize, brushType: .dot))
+        grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .blinker))
+        grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .glider))
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presets.count
+        return grid.presets.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetCell.identifier, for: indexPath) as! PresetCell
-        let preset = presets[indexPath.item]
+        let preset = grid.presets[indexPath.item]
         cell.set(preset: preset)
         
         return cell

@@ -17,7 +17,8 @@ class Grid {
     var height: CGFloat!
     var view: UIView!
     var cellSize: CGFloat!
-    
+    var currentPreset: ShapePreset!
+    var presets: [ShapePreset] = []
     var generations = 0 {
         didSet{
             NotificationCenter.default.post(name: .generationChanged, object: nil, userInfo: ["generations": generations])
@@ -51,6 +52,7 @@ class Grid {
         for j in 0...24 {
             for i in 0...24 {
                 let cell = Cell(frame: CGRect(x: width / 25 * CGFloat(j), y: height / 2 - width / 2 + width / 25 * CGFloat(i), width: width / 25, height: width / 25), isAlive: false)
+                cell.grid = self
                 if !isNext { view.addSubview(cell) }
                 gridColumn.append(cell)
             }

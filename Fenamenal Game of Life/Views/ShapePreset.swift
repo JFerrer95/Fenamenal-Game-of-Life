@@ -11,6 +11,7 @@ import UIKit
 enum BrushType: String {
     case dot
     case blinker
+    case glider
 }
 
 class ShapePreset: UIView {
@@ -64,6 +65,12 @@ class ShapePreset: UIView {
             box[1][0].makeAlive()
             box[1][1].makeAlive()
             box[1][2].makeAlive()
+        case .glider:
+            box[1][0].makeAlive()
+            box[2][1].makeAlive()
+            box[0][2].makeAlive()
+            box[1][2].makeAlive()
+            box[2][2].makeAlive()
         }
     }
     
