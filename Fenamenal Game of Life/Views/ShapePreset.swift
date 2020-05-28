@@ -10,9 +10,11 @@ import UIKit
 
 enum BrushType: String {
     case dot
+    case block
     case blinker
     case glider
     case beacon
+    case rPentomino
 }
 
 class ShapePreset: UIView {
@@ -79,6 +81,17 @@ class ShapePreset: UIView {
             box[3][2].makeAlive()
             box[2][3].makeAlive()
             box[3][3].makeAlive()
+        case .block:
+            box[0][0].makeAlive()
+            box[1][0].makeAlive()
+            box[0][1].makeAlive()
+            box[1][1].makeAlive()
+        case .rPentomino:
+            box[1][0].makeAlive()
+            box[2][0].makeAlive()
+            box[0][1].makeAlive()
+            box[1][1].makeAlive()
+            box[1][2].makeAlive()
         }
     }
     

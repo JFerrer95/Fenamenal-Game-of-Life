@@ -15,7 +15,7 @@ class GameVC: UIViewController {
     var timer = Timer()
     var isRunning = false
     let presetView = UIView()
-    var presetCollectionView: UICollectionView!
+    var presetTableView = UITableView()
     
     
     var label = UILabel()
@@ -119,27 +119,23 @@ class GameVC: UIViewController {
     }
     
     func setupPreset() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(collectionView)
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            self.presetView.topAnchor.constraint(equalTo: collectionView.topAnchor),
-            self.presetView.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            self.presetView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            self.presetView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+            self.presetView.topAnchor.constraint(equalTo: tableView.topAnchor),
+            self.presetView.bottomAnchor.constraint(equalTo: tableView.bottomAnchor),
+            self.presetView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
+            self.presetView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
         ])
-        self.presetCollectionView = collectionView
+        self.presetTableView = tableView
     }
     
     func setupCollectionView() {
-        self.presetCollectionView.dataSource = self
-        self.presetCollectionView.delegate = self
-        self.presetCollectionView.register(PresetCell.self, forCellWithReuseIdentifier: PresetCell.identifier)
-        self.presetCollectionView.backgroundColor = .white
-        self.presetCollectionView.allowsSelection = true
+        self.presetTableView.dataSource = self
+        self.presetTableView.delegate = self
+        self.presetTableView.allowsSelection = true
+        self.presetTableView.register(PresetCell.self, forCellReuseIdentifier: "PresetCell")
         
     }
     
@@ -147,8 +143,10 @@ class GameVC: UIViewController {
     
     func configurePresets() {
         grid.presets.append(ShapePreset(size: 1, cellWidth: grid.cellSize, brushType: .dot))
+        grid.presets.append(ShapePreset(size: 2, cellWidth: grid.cellSize, brushType: .block))
         grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .blinker))
         grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .glider))
+        grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .rPentomino))
         grid.presets.append(ShapePreset(size: 4, cellWidth: grid.cellSize, brushType: .beacon))
     }
     
@@ -156,26 +154,22 @@ class GameVC: UIViewController {
     
 }
 
-extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension GameVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return grid.presets.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetCell.identifier, for: indexPath) as! PresetCell
-        let preset = grid.presets[indexPath.item]
-        cell.set(preset: preset)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PresetCell", for: indexPath) as! PresetCell
         
+        cell.set(preset: grid.presets[indexPath.row])
         return cell
     }
+    
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         configureCurrentPresetView(index: indexPath.row)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: grid.cellSize * 6, height: grid.cellSize * 6)
-    }
     
 }

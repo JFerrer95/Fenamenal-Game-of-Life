@@ -83,10 +83,30 @@ class Cell: UIView {
             } else {
                 makeDead()
             }
-        } else if ((preset.box.count * preset.box.count) / 2) == 4  {
+        } else if ((preset.box.count * preset.box.count) / 2) == 2 {
+            checkFor4(coordinates: coordinates)
+        } else if ((preset.box.count * preset.box.count) / 2) == 4 {
             checkFor9(coordinates: coordinates)
         } else if ((preset.box.count * preset.box.count) / 2) == 8 {
             checkFor16(coordinates: coordinates)
+        }
+    }
+    
+    func checkFor4(coordinates: (x: Int, y: Int)) {
+        let rows = 25
+
+        for i in coordinates.x...coordinates.x+1 {
+            for j in coordinates.y...coordinates.y+1 {
+                if ((i >= rows) || (j >= rows) || ( i < 0 ) || (j < 0)) {
+                    continue
+                }
+                guard let presetCellIsActive = grid?.currentPreset.box[i - coordinates.x ][j - coordinates.y].isAlive else { return }
+                if presetCellIsActive {
+                    grid?.screenArray[i][j].makeAlive()
+                } else {
+                    grid?.screenArray[i][j].makeDead()
+                }
+            }
         }
     }
     
