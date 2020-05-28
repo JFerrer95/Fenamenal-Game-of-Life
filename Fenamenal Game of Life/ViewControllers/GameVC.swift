@@ -108,7 +108,7 @@ class GameVC: UIViewController {
         label.text = "Current Brush: " + grid.currentPreset.currentBrush.rawValue.capitalized
     }
     
-
+    
     
     func configurePresetBar() {
         presetView.translatesAutoresizingMaskIntoConstraints = false
@@ -143,7 +143,7 @@ class GameVC: UIViewController {
         presetTableView.backgroundColor = .clear
     }
     
-
+    
     
     func configurePresets() {
         grid.presets.append(ShapePreset(size: 1, cellWidth: grid.cellSize, brushType: .dot))
@@ -152,6 +152,7 @@ class GameVC: UIViewController {
         grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .glider))
         grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .rPentomino))
         grid.presets.append(ShapePreset(size: 4, cellWidth: grid.cellSize, brushType: .beacon))
+        grid.presets.append(ShapePreset(size: 1, cellWidth: grid.cellSize, brushType: .random))
     }
     
     func setBackgroundGradient() {
@@ -179,9 +180,22 @@ extension GameVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         configureCurrentPresetView(index: indexPath.row)
+
+        
+        if indexPath.row == 6 {
+        grid.resetGrid(grid: grid.screenArray)
+            for x in 0...24 {
+                for y in 0...24 {
+                    let rand = Int.random(in: 0...4)
+                    if rand == 1 {
+                        grid.screenArray[x][y].makeAlive()
+                    }
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

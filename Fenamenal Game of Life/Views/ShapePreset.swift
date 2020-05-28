@@ -15,6 +15,8 @@ enum BrushType: String {
     case glider
     case beacon
     case rPentomino
+    case random
+
 }
 
 class ShapePreset: UIView {
@@ -92,7 +94,13 @@ class ShapePreset: UIView {
             box[0][1].makeAlive()
             box[1][1].makeAlive()
             box[1][2].makeAlive()
+
+            
+            
+        case .random:
+            print("random")
         }
+        
     }
     
     

@@ -14,6 +14,8 @@ class SettingsVC: UIViewController {
     var speedSlider = UISlider()
     var stackView = UIStackView()
     var exitButton = UIButton()
+    let label = UILabel()
+
     var cellColorButtons = [UIButton]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +46,13 @@ class SettingsVC: UIViewController {
     private func configureExitButton() {
         view.addSubview(exitButton)
         exitButton.addTarget(self, action: #selector(exitButtonPressed), for: .touchUpInside)
-        exitButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        exitButton.setTitle("Dismiss", for: .normal)
         
         NSLayoutConstraint.activate([
                    exitButton.topAnchor.constraint(equalTo: view.topAnchor),
-                   exitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                   exitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                    exitButton.heightAnchor.constraint(equalToConstant: 100),
-                   exitButton.widthAnchor.constraint(equalTo: exitButton.heightAnchor)
+                   exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)
                ])
 
 
@@ -63,12 +65,19 @@ class SettingsVC: UIViewController {
         speedSlider.maximumValue = 2.0
         speedSlider.value = 1
         speedSlider.addTarget(self, action: #selector(speedsliderChanged), for: .valueChanged)
-        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
+        label.textAlignment = .center
+        label.text = "\(1.0 / speedSlider.value) generations per second"
+        label.textColor = .white
         NSLayoutConstraint.activate([
-            speedSlider.topAnchor.constraint(equalTo: exitButton.topAnchor, constant: 80),
+            speedSlider.topAnchor.constraint(equalTo: exitButton.topAnchor, constant: 200),
             speedSlider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             speedSlider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            speedSlider.heightAnchor.constraint(equalToConstant: 20)
+            speedSlider.heightAnchor.constraint(equalToConstant: 20),
+            
+            
+            label.bottomAnchor.constraint(equalTo: speedSlider.topAnchor, constant: -20)
         ])
     }
     
@@ -133,6 +142,7 @@ class SettingsVC: UIViewController {
     }
     @objc func speedsliderChanged(){
         grid?.speed = speedSlider.value
+        label.text = "\(1.0 / speedSlider.value) generations per second"
     }
     
 }
