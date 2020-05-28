@@ -46,7 +46,7 @@ class Cell: UIView {
     }
     
     func configureView() {
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(white: 1, alpha: 0.20)
         
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 1
@@ -54,7 +54,7 @@ class Cell: UIView {
     
     func makeDead() {
         self.isAlive = false
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(white: 1, alpha: 0.20)
     }
     
     func makeAlive() {

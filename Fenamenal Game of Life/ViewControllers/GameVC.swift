@@ -23,17 +23,21 @@ class GameVC: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        setBackgroundGradient()
         grid = Grid(width: self.view.frame.width, height: self.view.frame.height, view: self.view)
         settingsVC = SettingsVC(grid: grid)
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: .generationChanged, object: nil)
         configurePresetBar()
         setupPreset()
-        setupCollectionView()
+        setupTableView()
         configureCurrentPresetLabel()
         configurePresets()
+        configureCurrentPresetView(index: 0)
     }
     
     @objc func updateTitle(_ notification: NSNotification ) {
@@ -109,7 +113,7 @@ class GameVC: UIViewController {
     func configurePresetBar() {
         presetView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(presetView)
-        presetView.backgroundColor = .red
+        presetView.backgroundColor = .clear
         NSLayoutConstraint.activate([
             presetView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             presetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -131,12 +135,12 @@ class GameVC: UIViewController {
         self.presetTableView = tableView
     }
     
-    func setupCollectionView() {
+    func setupTableView() {
         self.presetTableView.dataSource = self
         self.presetTableView.delegate = self
         self.presetTableView.allowsSelection = true
         self.presetTableView.register(PresetCell.self, forCellReuseIdentifier: "PresetCell")
-        
+        presetTableView.backgroundColor = .clear
     }
     
 
@@ -150,12 +154,21 @@ class GameVC: UIViewController {
         grid.presets.append(ShapePreset(size: 4, cellWidth: grid.cellSize, brushType: .beacon))
     }
     
-
+    func setBackgroundGradient() {
+        let layer = CAGradientLayer()
+        layer.frame = view.bounds
+        layer.colors = [UIColor.gray.cgColor, UIColor.systemBlue.cgColor]
+        layer.startPoint = CGPoint(x: 0,y: 0)
+        layer.endPoint = CGPoint(x: 1,y: 1)
+        view.layer.addSublayer(layer)
+        
+    }
     
 }
 
 extension GameVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return grid.presets.count
     }
     
@@ -163,6 +176,8 @@ extension GameVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PresetCell", for: indexPath) as! PresetCell
         
         cell.set(preset: grid.presets[indexPath.row])
+
+
         return cell
     }
     
@@ -170,6 +185,9 @@ extension GameVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         configureCurrentPresetView(index: indexPath.row)
     }
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
+    }
     
 }

@@ -32,11 +32,18 @@
                         <viewLayoutGuide key="safeArea" id="VRo-Kp-8GT"/>
                     </view>
                     <navigationItem key="navigationItem" id="2UZ-za-jsI">
-                        <barButtonItem key="leftBarButtonItem" image="gear" catalog="system" id="fcq-dI-esH">
-                            <connections>
-                                <action selector="settingsButtonPressed:" destination="b7J-jF-E1J" id="mgg-zW-hmD"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem image="gear" catalog="system" id="fcq-dI-esH">
+                                <connections>
+                                    <action selector="settingsButtonPressed:" destination="b7J-jF-E1J" id="mgg-zW-hmD"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="info.circle" catalog="system" id="lQI-wZ-S7T">
+                                <connections>
+                                    <segue destination="dkM-ao-mPw" kind="show" id="krv-W3-ym0"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem image="forward.end" catalog="system" id="MVF-Fz-FRQ">
                                 <connections>
@@ -58,6 +65,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZL-Y7-oIF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1288" y="39"/>
+        </scene>
+        <!--Rules-->
+        <scene sceneID="CmR-mB-ben">
+            <objects>
+                <viewController id="dkM-ao-mPw" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="chR-s8-erq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="56b-a2-vJ8">
+                                <rect key="frame" x="8" y="96" width="398" height="758"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <mutableString key="text">The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, live or dead, (or populated and unpopulated, respectively). Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
+
+Any live cell with two or three live neighbors survives.
+
+Any dead cell with three live neighbors becomes a live cell.
+
+All other live cells die in the next generation. Similarly, all other dead cells stay dead.</mutableString>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="how-tp-QaK" firstAttribute="trailing" secondItem="56b-a2-vJ8" secondAttribute="trailing" constant="8" id="TfM-Cb-m3c"/>
+                            <constraint firstItem="56b-a2-vJ8" firstAttribute="leading" secondItem="how-tp-QaK" secondAttribute="leading" constant="8" id="nJq-EZ-2Sm"/>
+                            <constraint firstItem="56b-a2-vJ8" firstAttribute="top" secondItem="how-tp-QaK" secondAttribute="top" constant="8" id="uH4-DB-X4c"/>
+                            <constraint firstItem="how-tp-QaK" firstAttribute="bottom" secondItem="56b-a2-vJ8" secondAttribute="bottom" constant="8" id="zUU-dw-koD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="how-tp-QaK"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Rules" id="1VW-kM-lW2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z8S-GD-jhv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2189.8550724637685" y="38.839285714285715"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ad9-mp-M0v">
@@ -81,6 +126,7 @@
     <resources>
         <image name="forward.end" catalog="system" width="128" height="120"/>
         <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="play" catalog="system" width="120" height="128"/>
     </resources>
 </document>

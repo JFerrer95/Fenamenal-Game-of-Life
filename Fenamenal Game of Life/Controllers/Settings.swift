@@ -24,5 +24,7 @@ class Settings{
             NotificationCenter.default.post(name: .didChangeCellColor, object: nil)
         }
     }
-    
+
 }
+
+
