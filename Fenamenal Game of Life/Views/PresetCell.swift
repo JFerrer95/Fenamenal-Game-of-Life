@@ -12,32 +12,19 @@ class PresetCell: UICollectionViewCell {
     
     static var identifier: String = "PresetCell"
     
-    weak var textLabel: UILabel!
+    var preset: ShapePreset!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        let textLabel = UILabel(frame: .zero)
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(textLabel)
-        NSLayoutConstraint.activate([
-            self.contentView.centerXAnchor.constraint(equalTo: textLabel.centerXAnchor),
-            self.contentView.centerYAnchor.constraint(equalTo: textLabel.centerYAnchor),
-        ])
-        self.textLabel = textLabel
-        self.reset()
+    func set(preset: ShapePreset ) {
+        self.preset = preset
+
+        self.contentView.addSubview(preset)
+
+   
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    func select() {
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.yellow.cgColor
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.reset()
-    }
-    
-    func reset() {
-        self.textLabel.textAlignment = .center
-    }
+
 }

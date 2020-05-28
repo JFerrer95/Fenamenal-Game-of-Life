@@ -52,6 +52,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="nextButton" destination="MVF-Fz-FRQ" id="gcn-eB-5ZN"/>
+                        <outlet property="resetButton" destination="5w9-TP-Fja" id="08y-Eq-zwm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZL-Y7-oIF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

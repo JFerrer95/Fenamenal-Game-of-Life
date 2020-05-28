@@ -9,34 +9,32 @@
 import UIKit
 
 enum BrushType: String {
-    case cell
-    
-    
+    case dot
+    case blinker
 }
 
 class ShapePreset: UIView {
 
     var cellWidth: CGFloat
     var box = [[Cell]]()
-    var view: UIView
-    var presetView: UIView
     var size: Int
-    init( size: Int, cellWidth: CGFloat, view: UIView, presetView: UIView) {
+    init( size: Int, cellWidth: CGFloat, brushType: BrushType) {
         self.size = size
-        self.view = view
-        self.presetView = presetView
+        self.currentBrush = brushType
         self.cellWidth = cellWidth
         super.init(frame: CGRect(x: 0, y: 0, width: Int(cellWidth) * size, height: Int(cellWidth) * size))
         self.backgroundColor = .white
-        box = setupGrid()
+        box = setupPresetGrid()
+        setupPreset()
+        
     }
-    var currentBrush: BrushType = .cell
+    var currentBrush: BrushType = .dot
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupGrid() -> [[Cell]] {
-            
+    func setupPresetGrid() -> [[Cell]] {
+        
         var grid = [[Cell]]()
         var gridColumn = [Cell]()
         for j in 0...(size - 1) {
@@ -54,7 +52,22 @@ class ShapePreset: UIView {
         return grid
     }
     
+    func setupPreset() {
+        if currentBrush == .dot {
+            box[0][0].makeAlive()
+        }
+        switch currentBrush {
 
+        case .dot:
+            box[0][0].makeAlive()
+        case .blinker:
+            box[1][0].makeAlive()
+            box[1][1].makeAlive()
+            box[1][2].makeAlive()
+        }
+    }
+    
+    
     
 }
 

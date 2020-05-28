@@ -16,8 +16,12 @@ class GameVC: UIViewController {
     var isRunning = false
     let presetView = UIView()
     var presetCollectionView: UICollectionView!
-    
+    var presets: [ShapePreset] = []
+    var currentPreset: ShapePreset!
+    var label = UILabel()
     @IBOutlet weak var nextButton: UIBarButtonItem!
+    @IBOutlet weak var resetButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +31,9 @@ class GameVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: .generationChanged, object: nil)
         configurePresetBar()
         setupPreset()
-
+        setupCollectionView()
+        configureCurrentPresetLabel()
+        configurePresets()
     }
     
     @objc func updateTitle(_ notification: NSNotification ) {
@@ -69,6 +75,37 @@ class GameVC: UIViewController {
         grid.resetGame()
     }
     
+    func configureCurrentPresetLabel() {
+        label.text = "Current Brush: Dot"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 5),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+        ])
+        
+    }
+    
+    func configureCurrentPresetView(index: Int) {
+        if currentPreset != nil { currentPreset.removeFromSuperview() }
+        let selectedPreset = presets[index]
+        let preset = ShapePreset(size: selectedPreset.size, cellWidth: selectedPreset.cellWidth, brushType: selectedPreset.currentBrush)
+        currentPreset = preset
+        preset.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(preset)
+        
+        NSLayoutConstraint.activate([
+            preset.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 5),
+            preset.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -preset.frame.width / 2)
+        ])
+        
+        label.text = "Current Brush: " + currentPreset.currentBrush.rawValue
+    }
+    
+
+    
     func configurePresetBar() {
         presetView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(presetView)
@@ -82,17 +119,27 @@ class GameVC: UIViewController {
     }
     
     func setupPreset() {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            self.view.topAnchor.constraint(equalTo: collectionView.topAnchor),
-            self.view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            self.view.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            self.view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+            self.presetView.topAnchor.constraint(equalTo: collectionView.topAnchor),
+            self.presetView.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            self.presetView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
+            self.presetView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
         ])
         self.presetCollectionView = collectionView
-        
+    }
+    
+    func setupCollectionView() {
+        self.presetCollectionView.dataSource = self
+        self.presetCollectionView.delegate = self
+        self.presetCollectionView.register(PresetCell.self, forCellWithReuseIdentifier: PresetCell.identifier)
+        self.presetCollectionView.backgroundColor = .white
+        self.presetCollectionView.allowsSelection = true
         
     }
     
@@ -109,20 +156,33 @@ class GameVC: UIViewController {
         
     }
     
+
+    
 }
 
-extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func configurePresets() {
+        presets.append(ShapePreset(size: 1, cellWidth: grid.cellSize, brushType: .dot))
+        presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .blinker))
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return presets.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetCell.identifier, for: indexPath) as! PresetCell
+        let preset = presets[indexPath.item]
+        cell.set(preset: preset)
         
-        cell.textLabel.text = "\(indexPath.item)"
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        configureCurrentPresetView(index: indexPath.row)
+    }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: grid.cellSize * 6, height: grid.cellSize * 6)
+    }
     
 }
