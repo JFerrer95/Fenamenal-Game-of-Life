@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--GameVC-->
+        <!--Game of Life-->
         <scene sceneID="vdH-Am-N3o">
             <objects>
                 <viewController id="b7J-jF-E1J" customClass="GameVC" customModule="Fenamenal_Game_of_Life" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,7 +20,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                 <state key="normal" title="Reset"/>
                                 <connections>
-                                    <action selector="resetButtonPressed:" destination="b7J-jF-E1J" eventType="touchUpInside" id="Nmi-nz-kHe"/>
+                                    <action selector="resetButtonPressed:" destination="b7J-jF-E1J" eventType="touchDown" id="HIR-7B-i4G"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -31,7 +31,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VRo-Kp-8GT"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2UZ-za-jsI">
+                    <navigationItem key="navigationItem" title="Game of Life" id="2UZ-za-jsI">
                         <leftBarButtonItems>
                             <barButtonItem image="gear" catalog="system" id="fcq-dI-esH">
                                 <connections>
@@ -59,7 +59,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="nextButton" destination="MVF-Fz-FRQ" id="gcn-eB-5ZN"/>
-                        <outlet property="resetButton" destination="5w9-TP-Fja" id="08y-Eq-zwm"/>
+                        <outlet property="resetButton" destination="5w9-TP-Fja" id="ZKl-Q8-5cT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZL-Y7-oIF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

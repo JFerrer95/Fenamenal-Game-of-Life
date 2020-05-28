@@ -44,7 +44,7 @@ class GameVC: UIViewController {
         if let dict = notification.userInfo {
             if let id = dict["generations"] as? Int {
                 if id == 0{
-                    title = "Fenamenal Game of Life"
+                    title = "Game of Life"
                 } else {
                     title = "\(id) Generations"
                 }
@@ -176,8 +176,6 @@ extension GameVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PresetCell", for: indexPath) as! PresetCell
         
         cell.set(preset: grid.presets[indexPath.row])
-
-
         return cell
     }
     
@@ -187,7 +185,7 @@ extension GameVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 50
     }
     
 }
