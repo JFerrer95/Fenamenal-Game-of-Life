@@ -76,6 +76,7 @@ class Cell: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         guard let preset = grid?.currentPreset else { return }
+        guard let coordinates = getCoordinates() else { return }
         if preset.box.count == 1 {
             if isAlive == false {
                 makeAlive()
@@ -83,8 +84,27 @@ class Cell: UIView {
                 makeDead()
             }
         } else if ((preset.box.count * preset.box.count) / 2) == 4  {
-            guard let coordinates = getCoordinates() else { return }
             checkFor9(coordinates: coordinates)
+        } else if ((preset.box.count * preset.box.count) / 2) == 8 {
+            checkFor16(coordinates: coordinates)
+        }
+    }
+    
+    func checkFor16(coordinates: (x: Int, y: Int)) {
+        let rows = 25
+        
+        for i in coordinates.x-1...coordinates.x+2 {
+            for j in coordinates.y-1...coordinates.y+2 {
+                if ((i >= rows) || (j >= rows) || ( i < 0 ) || (j < 0)) {
+                    continue
+                }
+                guard let presetCellIsActive = grid?.currentPreset.box[i - coordinates.x + 1][j - coordinates.y + 1].isAlive else { return }
+                if presetCellIsActive {
+                    grid?.screenArray[i][j].makeAlive()
+                } else {
+                    grid?.screenArray[i][j].makeDead()
+                }
+            }
         }
     }
     
@@ -96,7 +116,7 @@ class Cell: UIView {
                 if ((i >= rows) || (j >= rows) || ( i < 0 ) || (j < 0)) {
                     continue
                 }
-       
+                
                 guard let presetCellIsActive = grid?.currentPreset.box[i - coordinates.x + 1][j - coordinates.y + 1].isAlive else { return }
                 if presetCellIsActive {
                     grid?.screenArray[i][j].makeAlive()

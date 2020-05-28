@@ -12,6 +12,7 @@ enum BrushType: String {
     case dot
     case blinker
     case glider
+    case beacon
 }
 
 class ShapePreset: UIView {
@@ -71,6 +72,13 @@ class ShapePreset: UIView {
             box[0][2].makeAlive()
             box[1][2].makeAlive()
             box[2][2].makeAlive()
+        case .beacon:
+            box[0][0].makeAlive()
+            box[1][0].makeAlive()
+            box[0][1].makeAlive()
+            box[3][2].makeAlive()
+            box[2][3].makeAlive()
+            box[3][3].makeAlive()
         }
     }
     

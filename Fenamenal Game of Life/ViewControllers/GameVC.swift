@@ -143,17 +143,13 @@ class GameVC: UIViewController {
         
     }
     
+
     
-    func checkPlacement(_ preset: ShapePreset) {
-        
-        for x in 0...24 {
-            for y in 0...24 {
-                if grid.screenArray[x][y].bounds.contains(preset.center) {
-                    print("in")
-                }
-            }
-        }
-        
+    func configurePresets() {
+        grid.presets.append(ShapePreset(size: 1, cellWidth: grid.cellSize, brushType: .dot))
+        grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .blinker))
+        grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .glider))
+        grid.presets.append(ShapePreset(size: 4, cellWidth: grid.cellSize, brushType: .beacon))
     }
     
 
@@ -161,11 +157,7 @@ class GameVC: UIViewController {
 }
 
 extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func configurePresets() {
-        grid.presets.append(ShapePreset(size: 1, cellWidth: grid.cellSize, brushType: .dot))
-        grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .blinker))
-        grid.presets.append(ShapePreset(size: 3, cellWidth: grid.cellSize, brushType: .glider))
-    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return grid.presets.count
     }

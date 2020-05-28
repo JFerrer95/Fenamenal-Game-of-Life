@@ -19,7 +19,7 @@ enum CellColor: Int {
 class Settings{
 
     static let shared = Settings()
-    var cellColor: CellColor = .random {
+    var cellColor: CellColor = .black {
         didSet{
             NotificationCenter.default.post(name: .didChangeCellColor, object: nil)
         }
